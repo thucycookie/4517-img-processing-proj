@@ -1,0 +1,6 @@
+To Run the server run:
+python3 manage.py runserver 0.0.0.0:8000
+
+To sync db to prevent table not found error:
+python manage.py migrate --run-syncdb
+
