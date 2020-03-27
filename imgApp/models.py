@@ -19,12 +19,12 @@ def content_file_name(instance, filename):
 # model for uploading images view
 class ImageModel(models.Model): 
         name = models.CharField(max_length=50)
-        preset_gray_or_poster_or_solar_or_none = models.CharField(max_length=50) 
+        preset_gray_or_edge_or_blur_or_none = models.CharField(max_length=50) 
         Main_Img = models.FileField(upload_to=content_file_name)
         ext = models.CharField(max_length=50)
 
 # model for downloading images view
 class DownloadImageModel(models.Model):
         name_To_Download = models.CharField(max_length=50)
-        preset_gray_or_poster_or_solar_or_none = models.CharField(max_length=50)
+        preset_gray_or_edge_or_blur_or_none = models.CharField(max_length=50)
         ext = models.CharField(max_length=50)

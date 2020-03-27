@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.RenameField(
             model_name='imagemodel',
             old_name='preset',
-            new_name='preset_gray_or_poster_or_solar_or_none',
+            new_name='preset_gray_or_edge_or_blur_or_none',
         ),
     ]

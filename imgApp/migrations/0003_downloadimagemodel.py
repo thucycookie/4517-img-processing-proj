@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=50)),
-                ('preset_gray_or_poster_or_solar_or_none', models.CharField(max_length=50)),
+                ('preset_gray_or_edge_or_blur_or_none', models.CharField(max_length=50)),
             ],
         ),
     ]

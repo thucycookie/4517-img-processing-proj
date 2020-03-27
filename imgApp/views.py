@@ -14,6 +14,8 @@ from botocore.exceptions import ClientError
 # for filtering
 from PIL import Image, ImageOps, ImageFilter
 
+import os
+
 def fileExistedOnS3(bucketName, fileName):
     s3 = boto3.resource('s3')
     
@@ -61,12 +63,17 @@ def apply_filter(file_path, preset):
         if preset == 'gray':
             im = ImageOps.grayscale(im)
             ext = 'gray'
-        if preset == 'poster':
-            im = ImageOps.posterize(im, 3)
-            ext = 'poster'
-        if preset == 'solar':
-            im = ImageOps.solarize(im, threshold=80)
-            ext = 'solar'
+        if preset == 'edge':
+            #im = ImageOps.posterize(im, 3)
+            #ext = 'poster'
+            im = ImageOps.grayscale(im)
+            im = im.filter(ImageFilter.FIND_EDGES)
+            ext = 'edge'
+        if preset == 'blur':
+            #im = ImageOps.solarize(im, threshold=80)
+            #ext = 'solar'
+            im = im.filter(ImageFilter.BLUR)
+            ext = 'blur'
         im.save(file_path.split(".")[0] + "_" + ext + "." + fileExt)
     
         print("Filter was applied successfully")
@@ -108,7 +115,7 @@ def image_view(request):
         
         print(file_path)
         
-        preset = request.POST.dict()["preset_gray_or_poster_or_solar_or_none"]
+        preset = request.POST.dict()["preset_gray_or_edge_or_blur_or_none"]
 
         if form.is_valid():
             form.save()
@@ -131,7 +138,7 @@ def display_images(request):
   
         # getting all the objects of hotel. 
         # Images = ImageModel.objects.all()
-        Images = settings.MEDIA_ROOT  + '/images/'
+        Images = os.listdir(settings.MEDIA_ROOT + '/images/') 
         return render(request, 'display_images.html', {'images': Images}) 
 
 def download_images_view(request):
@@ -142,7 +149,7 @@ def download_images_view(request):
         form = DownloadImageForm(request.POST, request.FILES)
         ext = request.POST.dict()["ext"]
         img_name = request.POST.dict()["name_To_Download"].replace(" ", "_")
-        pretext = request.POST.dict()["preset_gray_or_poster_or_solar_or_none"]
+        pretext = request.POST.dict()["preset_gray_or_edge_or_blur_or_none"]
         bucket = "4517-image-app"
         
         if form.is_valid():
