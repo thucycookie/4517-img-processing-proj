@@ -15,8 +15,8 @@
   
     {% for image in images %} 
             <div class="col-md-4"> 
-                    {{ image.name }} 
-                     <img src="{{ image.Main_Img.url }}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" /> 
+                    <!--{{ image.name }}-->
+                     <img src="{{MEDIA_URL}}/{image}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" /> 
             </div> 
     {% endfor %} 
   

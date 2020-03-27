@@ -130,7 +130,8 @@ def display_images(request):
     if request.method == 'GET': 
   
         # getting all the objects of hotel. 
-        Images = ImageModel.objects.all()  
+        # Images = ImageModel.objects.all()
+        Images = settings.MEDIA_ROOT  + '/images/'
         return render(request, 'display_images.html', {'images': Images}) 
 
 def download_images_view(request):
