@@ -14,13 +14,6 @@ from botocore.exceptions import ClientError
 # for filtering
 from PIL import Image, ImageOps, ImageFilter
 
-# for downloading portion
-from wsgiref.util import FileWrapper
-import mimetypes
-from django.conf import settings
-
-from django.contrib.staticfiles.views import serve
-
 def fileExistedOnS3(bucketName, fileName):
     s3 = boto3.resource('s3')
     
@@ -52,31 +45,8 @@ def download_image_from_S3(request, bucket_name, image_name):
         
         print("The destination is {}".format(dest))
         return serve(request, dest, insecure=True)
-        #s3_client.download_file(bucket_name, image_name, dest)
-        #response = HttpResponse(content_type='application/force-download') # mimetype is replaced by content_type for django 1.7
-        #response['Content-Disposition'] = 'attachment; filename=%s' % dest.split("/")[-1]
-        #response['X-Sendfile'] = smart_str(dest)
-        # It's usually a good idea to set the 'Content-Length' header too.
-        # You can also set any other required headers: Cache-Control, etc.
-        #return response
-        #with open(dest, "rb") as f:
-            #print("Downloading " + dest)
-            #return HttpResponse(f.read(), content_type="image/jpeg")
-        #response = HttpResponse(content_type="image/png")
-        #img = Image.open(dest)
-        #img.save(response,'png')
-        #return response 
-        # get image
-        #img = ImageModel.objects.get(name=image_name)
-        # img = Image.open(dest)
-        '''wrapper      = FileWrapper(open(dest))  # img.file returns full path to the image
-        content_type = mimetypes.guess_type(dest.split("/")[-1])[0]  # Use mimetypes to get file type
-        response     = HttpResponse(wrapper,content_type=content_type)  
-        response['Content-Length']      = os.path.getsize(dest)    
-        response['Content-Disposition'] = "attachment; filename=%s" %  dest.split("/")[-1]
-        return response'''
-    # if not, then dont let it download
-    else:
+    else: 
+        # if not, then dont let it download
         return redirect('imgNotFound')
 
 def apply_filter(file_path, preset):
@@ -122,10 +92,10 @@ def image_view(request):
 
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
+
         # since request.POST is a QueryDict
         # we must convert it to a normal dictionary data type
         # then we can access the field name from there
-
         print("The file name is: " + request.POST.dict()["name"])
         bucket = "4517-image-app"
 
