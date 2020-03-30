@@ -4,3 +4,11 @@ python3 manage.py runserver 0.0.0.0:8000
 To sync db to prevent table not found error:
 python manage.py migrate --run-syncdb
 
+To deploy the DJANGO app, install gunicorn:
+pip3 install gunicorn
+
+Make sure port 8000 is opened on your machine
+
+Make sure to change the variable path and name to reflect your application
+
+Run sh start_gnicorn.sh to deploy your application.
