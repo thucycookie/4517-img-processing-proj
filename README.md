@@ -1,9 +1,7 @@
 # 4517-img-processing-proj
 4517's Image Processing Django Application
 
-This is an app that let users to upload images and view them. 
-
-However, there is no functionality to download images. Maybe if I am not lazy, I will add that functionality. 
+This is an app that let users to upload images, view them and download. 
 
 Must do:
 
@@ -31,6 +29,7 @@ Endpoints:
 /display_images: to see images with their names
 /image_upload: to upload images
 /success: should show up after a user has successfully uploaded an image
+/download_images: to download images
 
 For more endpoints, look into urls.py and views.py in imgApp/ directory.
 --------------------------------------------------------------------------
