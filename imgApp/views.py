@@ -42,11 +42,15 @@ def download_image_from_S3(request, bucket_name, image_name):
     print("Name of the image is {}".format(image_name)) 
     print("Value of image_found is {}".format(image_found))
     if image_found:
-        # download image to root of media directory
-        dest = settings.MEDIA_ROOT + "/images/" + image_name
-        
-        print("The destination is {}".format(dest))
-        return serve(request, dest, insecure=True)
+
+        # generate a pre-signed download link
+        # that only availables for 15 seconds
+        url = s3_client.generate_presigned_url(ClientMethod='get_object', \
+            Params={'Bucket': bucket_name, \ 
+            'Key': image_name}, \ 
+            ExpiresIn=15)
+        return redirect(url)
+
     else: 
         # if not, then dont let it download
         return redirect('imgNotFound')
