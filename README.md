@@ -26,6 +26,14 @@ But if you want to change it, make sure to change it in the start_gunicorn.sh sc
 2. Since we use gunicorn to deploy our DJANGO app, I suggest you to google how to create init script. Make sure to specify the command su - "sh /path/to/start_gnicorn.sh" user_that_you_use_to_clone_this_repo in order to start gunicorn. 
 
 --------------------------------------------------------------------------
+Endpoints:
+
+/display_images: to see images with their names
+/image_upload: to upload images
+/success: should show up after a user has successfully uploaded an image
+
+For more endpoints, look into urls.py and views.py in imgApp/ directory.
+--------------------------------------------------------------------------
 
 A few more things to keep in mind:
 
