@@ -27,8 +27,11 @@ But if you want to change it, make sure to change it in the start_gunicorn.sh sc
 Endpoints:
 
 /display_images: to see images with their names
+
 /image_upload: to upload images
+
 /success: should show up after a user has successfully uploaded an image
+
 /download_images: to download images
 
 For more endpoints, look into urls.py and views.py in imgApp/ directory.
