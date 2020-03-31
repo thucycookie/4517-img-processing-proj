@@ -51,7 +51,7 @@ def download_image_from_S3(request, bucket_name, image_name):
         url = s3_client.generate_presigned_url(ClientMethod='get_object', \
             Params={'Bucket': bucket_name, 'Key': image_name}, \
                     ExpiresIn=15)
-        return HttpResponseRedirect(url)
+        return url
 
     else: 
         # if not, then dont let it download
@@ -163,7 +163,9 @@ def download_images_view(request):
             
             print("Downloading file from S3")
 
-            download_image_from_S3(request, bucket, img_name + "_" + pretext + "." + ext)    
+            url = download_image_from_S3(request, bucket, img_name + "_" + pretext + "." + ext)    
+            print('Presigned URL is {}'.format(url))
+            return HttpResponseRedirect(url)
     else:
         form = DownloadImageForm()
     return render(request, 'download.html', {'form' : form})
