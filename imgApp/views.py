@@ -46,9 +46,8 @@ def download_image_from_S3(request, bucket_name, image_name):
         # generate a pre-signed download link
         # that only availables for 15 seconds
         url = s3_client.generate_presigned_url(ClientMethod='get_object', \
-            Params={'Bucket': bucket_name, \ 
-            'Key': image_name}, \ 
-            ExpiresIn=15)
+            Params={'Bucket': bucket_name, 'Key': image_name}, \
+                    ExpiresIn=15)
         return redirect(url)
 
     else: 
