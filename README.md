@@ -50,3 +50,6 @@ Make sure port 8000 is opened on your machine
 Make sure to change the variable path and name to reflect your application
 
 Run sh start_gnicorn.sh to deploy your application.
+
+--------------------------------------------------------------------------
+One quirky thing that I learned is that if a view accepting requests, any responses must be return within that view so if you trying to pass the requests into another function and have that function try to return responses, that won't work. 
