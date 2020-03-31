@@ -16,6 +16,9 @@ from PIL import Image, ImageOps, ImageFilter
 
 import os
 
+# for sending presigned url to download images
+from django.http import HttpResponseRedirect
+
 def fileExistedOnS3(bucketName, fileName):
     s3 = boto3.resource('s3')
     
