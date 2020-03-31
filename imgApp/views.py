@@ -48,7 +48,7 @@ def download_image_from_S3(request, bucket_name, image_name):
         url = s3_client.generate_presigned_url(ClientMethod='get_object', \
             Params={'Bucket': bucket_name, 'Key': image_name}, \
                     ExpiresIn=15)
-        return redirect(url)
+        return HttpResponseRedirect(url)
 
     else: 
         # if not, then dont let it download
